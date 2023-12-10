@@ -4,6 +4,6 @@ export type Note = {
     body: string;
     isDeleted: boolean;
     createdDate: Date;
-    lastModifiedDate: Date;
-    deletedDate: Date;
+    lastModifiedDate?: Date;
+    deletedDate?: Date;
 }
