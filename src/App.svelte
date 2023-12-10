@@ -38,6 +38,8 @@
 
   #notes-list-container {
     width: 100rem;
+    height: 750px;
+    overflow: auto;
     border-right: solid var(--container-b-color);
   }
 
@@ -51,5 +53,24 @@
 
   .main-container {
     display: flex;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border: .5px solid var(--container-b-color);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--container-b-color);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--container-b-color);
   }
 </style>
