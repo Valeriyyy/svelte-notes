@@ -31,7 +31,7 @@
 
   #notes-header {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     border-bottom: solid var(--container-b-color);
     padding: 20px;
   }
@@ -48,7 +48,9 @@
   }
 
   .button-group {
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   .main-container {
@@ -56,12 +58,12 @@
   }
 
   ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 5px;
+    height: 5px;
   }
 
   ::-webkit-scrollbar-track {
-    border: .5px solid var(--container-b-color);
+    border: 0.5px solid var(--container-b-color);
     border-radius: 5px;
   }
 
