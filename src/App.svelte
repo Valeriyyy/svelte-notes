@@ -37,7 +37,7 @@
   }
 
   #notes-list-container {
-    width: 100rem;
+    width: 170rem;
     height: 750px;
     overflow: auto;
     border-right: solid var(--container-b-color);

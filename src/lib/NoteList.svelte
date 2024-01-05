@@ -6,7 +6,7 @@
   for (let i = 0; i <= 10; i++) {
     let note: Note = {
       id: i,
-      header: "header that is more than 10" + i,
+      header: "header that is more than 34 characters long " + i,
       body: "this is the notes body and it has quite a lot of text in it " + i,
       isDeleted: false,
       createdDate: new Date(),
@@ -19,9 +19,11 @@
   console.log(notesStore);
 </script>
 
-{#each notesStore as note}
-  <NoteItem {note} />
-{/each}
+<section>
+  {#each notesStore as note, i}
+    <NoteItem {note}/>
+  {/each}
+</section>
 
 <style>
 </style>
