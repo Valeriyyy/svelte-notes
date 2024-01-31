@@ -13,7 +13,6 @@
       lastModifiedDate: null,
       deletedDate: null,
     };
-    console.log(note);
     notesStore.push(note);
   }
   console.log(notesStore);
