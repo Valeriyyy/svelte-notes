@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Router, Link, Route } from "svelte-routing";
   import { type Note } from "../models/Note";
-  import SomePage from "./SomePage.svelte";
 
   export let note: Note =  {
     id: 99999,

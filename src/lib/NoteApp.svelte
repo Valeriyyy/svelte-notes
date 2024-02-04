@@ -3,7 +3,6 @@
     import NoteList from "./NoteList.svelte";
     import NoteView from "./NoteView.svelte";
     import { type Note } from "../models/Note";
-    import SomePage from "./SomePage.svelte";
   
     let url: string = "";
 </script>
@@ -16,7 +15,7 @@
             </Link>
         </Router>
         <div class="button-group">
-        <button>New Note</button>
+          <button>New Note</button>
         </div>
     </div>
     <div class="main-container">
@@ -40,6 +39,7 @@
     display: flex;
     border-bottom: solid var(--container-b-color);
     padding: 20px;
+    position: relative;
   }
 
   #notes-list-container {
@@ -57,6 +57,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    padding: 40px 20px;
   }
 
   .main-container {

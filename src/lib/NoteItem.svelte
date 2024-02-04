@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Router, Link, Route } from "svelte-routing";
   import { type Note } from "../models/Note";
-  import SomePage from "./SomePage.svelte";
   export let note: Note;
   let noteHeaderLimit = 44;
   let noteBodyLimit = 70;
@@ -49,6 +48,6 @@
   }
 
   .date-times {
-    font-size: .8em;
+    font-size: .8rem;
   }
 </style>
