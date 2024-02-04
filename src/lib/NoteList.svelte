@@ -18,9 +18,9 @@
   console.log(notesStore);
 </script>
 
-<section>
+<section style="height: 100%;">
   {#each notesStore as note, i}
-    <NoteItem {note}/>
+    <NoteItem {note} />
   {/each}
 </section>
 

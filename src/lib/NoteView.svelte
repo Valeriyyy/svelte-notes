@@ -2,7 +2,7 @@
   import { Router, Link, Route } from "svelte-routing";
   import { type Note } from "../models/Note";
 
-  export let note: Note =  {
+  export let note: Note = {
     id: 99999,
     header: "This is the deafult empty note header",
     body: "This is the default empty note body",
@@ -27,32 +27,22 @@
   }
 </script>
 
-<!-- <h1>
-  This is where the notes body for the new note or the selected note will go
-</h1>
-<p class="pix">
-  {note.body}
-</p> -->
 <div>
-  <textarea class="pix" rows="15" cols="35">{note.body}</textarea>
+  <textarea class="note-edit" rows="15" cols="35">{note.body}</textarea>
   <div class="buttons-area">
     <div class="button-group">
-      <button style="padding-right: 5px;" on:click={(e) => cancel(e)}>
-        Cancel
-      </button>
-      <button on:click={(e) => save(e)}>
-        Save
-      </button>
+      <button on:click={(e) => cancel(e)}> Cancel </button>
+      <button on:click={(e) => save(e)}> Save </button>
     </div>
   </div>
 </div>
 
-
 <style>
-  .pix {
+  .note-edit {
     font-size: 3em;
     background-color: transparent;
     border: none;
+    width: 100%;
   }
 
   .buttons-area {
@@ -63,5 +53,6 @@
     display: flex;
     justify-content: right;
     padding: 10px;
+    gap: 0.625em;
   }
 </style>
