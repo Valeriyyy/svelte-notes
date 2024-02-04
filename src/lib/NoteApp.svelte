@@ -1,31 +1,38 @@
 <script lang="ts">
-    import { Router, Link } from "svelte-routing";
-    import NoteList from "./NoteList.svelte";
-    import NoteView from "./NoteView.svelte";
-    import { type Note } from "../models/Note";
-  
-    let url: string = "";
+  import { Router, Link } from "svelte-routing";
+  import NoteList from "./NoteList.svelte";
+  import NoteView from "./NoteView.svelte";
+  import { type Note } from "../models/Note";
+
+  let url: string = "";
+
+  function newNote(e: Event) {
+    alert("this is where the logic to create a new note would go");
+  }
 </script>
 
 <div class="container">
-    <div id="notes-header">
-        <Router>
-            <Link to="/" style="text-decoration:none; color: rgba(255, 255, 255, 0.87) !important;"> 
-                <h1>Svelte Notes</h1>
-            </Link>
-        </Router>
-        <div class="button-group">
-          <button>New Note</button>
-        </div>
+  <div id="notes-header">
+    <Router>
+      <Link
+        to="/"
+        style="text-decoration:none; color: rgba(255, 255, 255, 0.87) !important;"
+      >
+        <h1>Svelte Notes</h1>
+      </Link>
+    </Router>
+    <div class="button-group">
+      <button on:click={(e) => newNote(e)}>New Note</button>
     </div>
-    <div class="main-container">
-        <div id="notes-list-container">
-            <NoteList />
-        </div>
-        <div id="notes-body">
-            <NoteView />
-        </div>
+  </div>
+  <div class="main-container">
+    <div id="notes-list-container">
+      <NoteList />
     </div>
+    <div id="notes-body">
+      <NoteView />
+    </div>
+  </div>
 </div>
 
 <style>
@@ -44,7 +51,7 @@
 
   #notes-list-container {
     width: 170rem;
-    height: 750px;
+    height: 790px;
     overflow: auto;
     border-right: solid var(--container-b-color);
   }

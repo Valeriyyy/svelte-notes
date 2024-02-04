@@ -11,6 +11,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --container-b-color: #353535;
+  --element-border-hover: #646cff;
 }
 
 #app {
@@ -29,12 +30,16 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  border-color: var(--element-border-hover, red);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+.button-group {
+  display: flex;
+  justify-content: right;
+  padding: 10px;
+  gap: 0.625em;
 }
 
 @media (prefers-color-scheme: light) {

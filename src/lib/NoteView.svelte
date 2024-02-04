@@ -28,8 +28,13 @@
 </script>
 
 <div>
-  <textarea class="note-edit" rows="15" cols="35">{note.body}</textarea>
-  <div class="buttons-area">
+  <div id="noteHeader">
+    <input type="text" id="noteTitle" />
+  </div>
+  <div id="noteBody">
+    <textarea class="note-edit" rows="15" cols="35">{note.body}</textarea>
+  </div>
+  <div id="note-footer">
     <div class="button-group">
       <button on:click={(e) => cancel(e)}> Cancel </button>
       <button on:click={(e) => save(e)}> Save </button>
@@ -38,6 +43,24 @@
 </div>
 
 <style>
+  #noteHeader {
+    width: 100%;
+    border: 1px;
+  }
+
+  #noteTitle {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+  }
+
+  #noteBody {
+  }
+
+  #note-footer {
+    height: 65px;
+  }
+
   .note-edit {
     font-size: 3em;
     background-color: transparent;
@@ -45,14 +68,8 @@
     width: 100%;
   }
 
-  .buttons-area {
-    height: 65px;
-  }
-
-  .button-group {
-    display: flex;
-    justify-content: right;
-    padding: 10px;
-    gap: 0.625em;
+  textarea:focus {
+    border-color: var(--element-border-hover, red);
+    outline: none;
   }
 </style>

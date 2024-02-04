@@ -6,40 +6,45 @@
   let noteBodyLimit = 70;
   let url: string = "";
 
-  function clickedNote () {
+  function clickedNote() {
     console.log(`Note item ${note.id} has been clicked`);
   }
 </script>
 
 <Router {url}>
-  <Link to={`/note/${note.id}`} style="text-decoration: none; color: rgba(255, 255, 255, 0.87) !important;">
+  <Link
+    to={`/note/${note.id}`}
+    style="text-decoration: none; color: rgba(255, 255, 255, 0.87) !important;"
+  >
     <article>
       <div class="note-card">
         {#if note.header.length > noteHeaderLimit}
-        <h2>{note.header.substring(0, noteHeaderLimit)}...</h2>
+          <h2>{note.header.substring(0, noteHeaderLimit)}...</h2>
         {:else}
-        <h2>{note.header}</h2>
+          <h2>{note.header}</h2>
         {/if}
         {#if note.body.length > noteBodyLimit}
-        <h5>{note.body.substring(0, noteBodyLimit)}...</h5>
+          <h5>{note.body.substring(0, noteBodyLimit)}...</h5>
         {:else}
-        <h5>{note.body}</h5>
+          <h5>{note.body}</h5>
         {/if}
-        
         <div class="date-times">
           CreatedDate: {note.createdDate.getMonth()}-{note.createdDate.getDay()}-{note.createdDate.getFullYear()}
           {#if note.lastModifiedDate != null}
-          LastModifiedDate: {note.lastModifiedDate.getMonth()}-{note.lastModifiedDate.getDay()}-{note.lastModifiedDate.getFullYear()}
+            LastModifiedDate: {note.lastModifiedDate.getMonth()}-{note.lastModifiedDate.getDay()}-{note.lastModifiedDate.getFullYear()}
           {/if}
         </div>
       </div>
-    </article>  
+    </article>
   </Link>
 </Router>
 
-  
-
 <style>
+  article:hover {
+    color: #cccccc;
+    transition: 1s;
+  }
+
   .note-card {
     border-bottom: solid var(--container-b-color);
     padding: 0;
@@ -48,6 +53,6 @@
   }
 
   .date-times {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 </style>
