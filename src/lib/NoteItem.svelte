@@ -2,7 +2,7 @@
   import { Router, Link, Route } from "svelte-routing";
   import { type Note } from "../models/Note";
   export let note: Note;
-  let noteHeaderLimit = 44;
+  let noteHeaderLimit = 34;
   let noteBodyLimit = 70;
   let url: string = "";
 
@@ -19,7 +19,9 @@
     <article>
       <div class="note-card">
         {#if note.header.length > noteHeaderLimit}
-          <h2>{note.header.substring(0, noteHeaderLimit)}...</h2>
+          <h2 style="margin-top: 0">
+            {note.header.substring(0, noteHeaderLimit)}...
+          </h2>
         {:else}
           <h2>{note.header}</h2>
         {/if}
@@ -41,8 +43,8 @@
 
 <style>
   article:hover {
-    color: #cccccc;
-    transition: 1s;
+    color: #a3a3a3;
+    transition: 0.3s;
   }
 
   .note-card {

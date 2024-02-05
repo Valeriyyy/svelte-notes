@@ -1,10 +1,11 @@
 <script lang="ts">
   import { Router, Link, Route } from "svelte-routing";
   import { type Note } from "../models/Note";
+  import { message } from "../store";
 
   export let note: Note = {
     id: 99999,
-    header: "This is the deafult empty note header",
+    header: "This is the default empty note header",
     body: "This is the default empty note body",
     isDeleted: false,
     createdDate: new Date(),
@@ -12,12 +13,10 @@
     deletedDate: null,
   };
 
-  let url: string = "";
-
   function save(e: Event) {
     e.preventDefault();
     console.log("Saving changes to note");
-    note.body = "Note contents have been changed";
+    $message = note.body;
   }
 
   function cancel(e: Event) {
@@ -29,10 +28,22 @@
 
 <div>
   <div id="noteHeader">
-    <input type="text" id="noteTitle" />
+    <input
+      type="text"
+      id="noteTitle"
+      maxlength="50"
+      placeholder="Enter notes title"
+      bind:value={note.header}
+    />
   </div>
   <div id="noteBody">
-    <textarea class="note-edit" rows="15" cols="35">{note.body}</textarea>
+    <textarea
+      class="note-edit"
+      rows="15"
+      cols="35"
+      bind:value={note.body}
+      placeholder="Enter notes contents"
+    ></textarea>
   </div>
   <div id="note-footer">
     <div class="button-group">
@@ -45,13 +56,18 @@
 <style>
   #noteHeader {
     width: 100%;
-    border: 1px;
   }
 
   #noteTitle {
     width: 100%;
     background-color: transparent;
     border: none;
+    height: 80px;
+    font-size: 30px;
+  }
+
+  #noteTitle:focus {
+    outline: none;
   }
 
   #noteBody {
