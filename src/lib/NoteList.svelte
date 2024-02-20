@@ -1,25 +1,13 @@
 <script lang="ts">
+  import { Router, Link, Route } from "svelte-routing";
   import NoteItem from "./NoteItem.svelte";
-  import { type Note } from "../models/Note";
-  let notesStore: Note[] = [];
-
-  for (let i = 0; i <= 10; i++) {
-    let note: Note = {
-      id: i,
-      header: "header that is more than 34 characters long " + i,
-      body: "this is the notes body and it has quite a lot of text in it " + i,
-      isDeleted: false,
-      createdDate: new Date(),
-      lastModifiedDate: null,
-      deletedDate: null,
-    };
-    notesStore.push(note);
-  }
-  console.log(notesStore);
+  import NoteView from "./NoteView.svelte";
+  import { notes } from "../store";
+  let url: string = "";
 </script>
 
 <section style="height: 100%;">
-  {#each notesStore as note, i}
+  {#each $notes as note, i}
     <NoteItem {note} />
   {/each}
 </section>

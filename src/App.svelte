@@ -3,17 +3,20 @@
   import NoteView from "./lib/NoteView.svelte";
   import { Router, Link, Route } from "svelte-routing";
   import { type Note } from "./models/Note";
-    import NoteApp from "./lib/NoteApp.svelte";
-
+  import NoteApp from "./lib/NoteApp.svelte";
+  import { notes } from "./store";
+  
   let url: string = "/notes";
+
 </script>
 
 <main>
-  <Router {url}>
+  <Router>
+    <NoteApp />
+  </Router>
+  <!-- <Router {url}>
     <Route component={NoteApp}>
     </Route>
-    <!-- <Route path="/note/:id" let:params>
-      <SomePage note={params.note} />
-    </Route> -->
-  </Router>
+  </Router> -->
 </main>
+

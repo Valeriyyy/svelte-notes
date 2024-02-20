@@ -1,17 +1,26 @@
 <script lang="ts">
-  import { Router, Link, Route } from "svelte-routing";
+  import { Router, Link, Route, navigate } from "svelte-routing";
   import { type Note } from "../models/Note";
+  import NoteView from "./NoteView.svelte";
   export let note: Note;
   let noteHeaderLimit = 34;
   let noteBodyLimit = 70;
   let url: string = "";
 
   function clickedNote() {
-    console.log(`Note item ${note.id} has been clicked`);
+    alert(`Note item ${note.id} has been clicked`);
+  }
+
+  function getPrettyCreatedDate(): string {
+    return `${note.createdDate.getMonth()}-${note.createdDate.getDay()}-${note.createdDate.getFullYear()}`;
+  }
+
+  function getPrettyModifiedDate(): string {
+    return `${note.lastModifiedDate.getMonth()}-${note.lastModifiedDate.getDay()}-${note.lastModifiedDate.getFullYear()}`;
   }
 </script>
 
-<Router {url}>
+<Router>
   <Link
     to={`/note/${note.id}`}
     style="text-decoration: none; color: rgba(255, 255, 255, 0.87) !important;"
@@ -31,9 +40,9 @@
           <h5>{note.body}</h5>
         {/if}
         <div class="date-times">
-          CreatedDate: {note.createdDate.getMonth()}-{note.createdDate.getDay()}-{note.createdDate.getFullYear()}
+          CreatedDate: {getPrettyCreatedDate()}
           {#if note.lastModifiedDate != null}
-            LastModifiedDate: {note.lastModifiedDate.getMonth()}-{note.lastModifiedDate.getDay()}-{note.lastModifiedDate.getFullYear()}
+            LastModifiedDate: {getPrettyModifiedDate()}
           {/if}
         </div>
       </div>

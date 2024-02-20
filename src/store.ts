@@ -1,13 +1,18 @@
-import { writable } from 'svelte/store';
+import { readable, writable } from 'svelte/store';
+import type { Note } from './models/Note';
 
-/* const count = writable(0);
+let notesStore: Note[] = [];
 
-count.subscribe((value) => {
-    console.log(value);
-});
+for (let i = 0; i <= 10; i++) {
+    let note = {
+        id: i,
+        header: "header that is more than 34 characters long " + i,
+        body: "this is the notes body and it has quite a lot of text in it " + i,
+        isDeleted: false,
+        createdDate: new Date(),
+    };
+    notesStore.push(note);
+}
+export const notes = writable(notesStore);
 
-count.set(1);
 
-count.update((n) => n + 1); */
-
-export let message = writable("Hello");

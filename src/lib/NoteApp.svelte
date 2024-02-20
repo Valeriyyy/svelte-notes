@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Router, Link } from "svelte-routing";
+  import { Router, Link, Route } from "svelte-routing";
   import NoteList from "./NoteList.svelte";
   import NoteView from "./NoteView.svelte";
   import { type Note } from "../models/Note";
@@ -13,27 +13,27 @@
 
 <div class="container">
   <div id="notes-header">
-    <Router>
       <Link
         to="/"
         style="text-decoration:none; color: rgba(255, 255, 255, 0.87) !important;"
       >
-        <h1>Svelte Notes</h1>
-      </Link>
-    </Router>
-    <div class="button-group">
-      <button on:click={(e) => newNote(e)}>New Note</button>
+      <h1>Svelte Notes</h1>
+    </Link>
+      <div class="button-group">
+        <button on:click={(e) => newNote(e)}>New Note</button>
+      </div>
+    </div>
+    <div class="main-container">
+      <div id="notes-list-container">
+        <NoteList />
+      </div>
+      <div id="notes-body">
+          <Route path="/:noteId" let:params>
+            <NoteView noteId={parseInt(params.noteId)} />
+          </Route>
+      </div>
     </div>
   </div>
-  <div class="main-container">
-    <div id="notes-list-container">
-      <NoteList />
-    </div>
-    <div id="notes-body">
-      <NoteView />
-    </div>
-  </div>
-</div>
 
 <style>
   .container {
