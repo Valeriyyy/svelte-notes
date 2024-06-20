@@ -3,6 +3,7 @@
   import { type Note } from "../models/Note";
   import NoteView from "./NoteView.svelte";
   export let note: Note;
+  export let noteId: number = note.id;
   let noteHeaderLimit = 34;
   let noteBodyLimit = 70;
   let url: string = "";
@@ -22,7 +23,7 @@
 
 <Router>
   <Link
-    to={`/note/${note.id}`}
+    to={`/note/${noteId}`}
     style="text-decoration: none; color: rgba(255, 255, 255, 0.87) !important;"
   >
     <article>
@@ -32,7 +33,7 @@
             {note.header.substring(0, noteHeaderLimit)}...
           </h2>
         {:else}
-          <h2>{note.header}</h2>
+          <h2>{note.header} header</h2>
         {/if}
         {#if note.body.length > noteBodyLimit}
           <h5>{note.body.substring(0, noteBodyLimit)}...</h5>
