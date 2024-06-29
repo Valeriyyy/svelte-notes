@@ -1,15 +1,15 @@
 <script lang="ts">
-    import { Router, Link, Route } from "svelte-routing";
-    import NoteList from "./NoteList.svelte";
+    import { Link, Route } from "svelte-routing";
     import NoteView from "./NoteView.svelte";
-    import { type Note } from "../models/Note";
     import NoteItem from "./NoteItem.svelte";
     import { notes } from "../store";
 
-    let url: string = "";
+    $: noteState = "";
 
-    function newNote(e: Event) {
-        alert("this is where the logic to create a new note would go");
+    function toggleNewNote(e: Event) {
+        // alert("this is where the logic to create a new note would go");
+        console.log("toggling new note or whatever");
+        noteState = noteState == "new" ? "no" : "new";
     }
 </script>
 
@@ -22,7 +22,8 @@
             <h1>Svelte Notes</h1>
         </Link>
         <div class="button-group">
-            <button on:click={(e) => newNote(e)}>New Note</button>
+            <button on:click={(e) => toggleNewNote(e)}>New Note</button>
+            <!-- <a href="/new"> New Note </a> -->
         </div>
     </div>
     <div class="main-container">
@@ -32,11 +33,13 @@
             {/each}
         </div>
         <div id="notes-body">
-            <Route path="/note/:noteId" let:params>
-                <!-- <h1>problem{JSON.stringify(params)}</h1>
-                <h1>h1 {params.noteId}</h1> -->
-                <NoteView noteId={parseInt(params.noteId)} />
-            </Route>
+            {#if noteState == "new"}
+                <NoteView />
+            {:else}
+                <Route path="/note/:noteId" let:params>
+                    <NoteView noteId={parseInt(params.noteId)} />
+                </Route>
+            {/if}
         </div>
     </div>
 </div>

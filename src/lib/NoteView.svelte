@@ -1,58 +1,91 @@
 <script lang="ts">
-    import { Router, Link, Route } from "svelte-routing";
-    import { type Note } from "../models/Note";
-    import { get } from "svelte/store";
-    import { notes } from "../store";
     import { onMount } from "svelte";
+    import NotesService from "../services/service.notes";
+    import type { Note } from "../models/Note";
+    import { Router, Link, Route, navigate } from "svelte-routing";
 
-    export let noteId: number = 0;
-
-    $: womp = noteId;
-    console.log("set note id ", noteId);
-    $: note = get(notes)[noteId];
+    const service = new NotesService();
+    export let noteId: number = null;
+    export let noteFromList: Note = null;
+    //$: note = get(notes)[noteId];
+    $: note =
+        noteId == null
+            ? { id: null, header: null, body: null, isDeleted: false }
+            : service.GetNoteById(noteId);
     function save(e: Event) {
         e.preventDefault();
-        console.log("Saving changes to note");
+        console.log("saving note with data", note);
+        service.InsertNewNote(note);
+
+        console.log("created new note", note);
+        navigate("/");
     }
 
     function cancel(e: Event) {
         e.preventDefault();
-        console.log("Canceling changes to note");
-        note.body = "Note editing has been canceled";
+        //note.body = "Note editing has been canceled";
     }
 
-    onMount(() => {
-        console.log("note view mounted");
-        console.log("note id", noteId);
+    onMount(async () => {
+        //note = await service.GetNoteByIdAsync(noteId);
     });
 </script>
 
-<div>
-    <div id="noteHeader">
-        <input
-            type="text"
-            id="noteTitle"
-            maxlength="50"
-            placeholder="Enter notes title"
-            bind:value={note.header}
-        />
-    </div>
-    <div id="noteBody">
-        <textarea
-            class="note-edit"
-            rows="15"
-            cols="35"
-            bind:value={note.body}
-            placeholder="Enter notes contents"
-        ></textarea>
-    </div>
-    <div id="note-footer">
-        <div class="button-group">
-            <button on:click={(e) => cancel(e)}> Cancel </button>
-            <button on:click={(e) => save(e)}> Save </button>
+{#if note == null}
+    <div>
+        <div id="noteHeader">
+            <input
+                type="text"
+                id="noteTitle"
+                maxlength="50"
+                placeholder="Enter notes title"
+                bind:value={note.body}
+            />
+        </div>
+        <div id="noteBody">
+            <textarea
+                class="note-edit"
+                rows="15"
+                cols="35"
+                placeholder="Enter notes contents"
+                bind:value={note.header}
+            ></textarea>
+        </div>
+        <div id="note-footer">
+            <div class="button-group">
+                <button on:click={(e) => cancel(e)}> Cancel </button>
+                <button on:click={(e) => save(e)}> Save </button>
+            </div>
         </div>
     </div>
-</div>
+{:else}
+    <div>
+        <div id="noteHeader">
+            <input
+                type="text"
+                id="noteTitle"
+                maxlength="50"
+                placeholder="Enter notes title"
+                bind:value={note.header}
+            />
+        </div>
+        <div id="noteBody">
+            <textarea
+                class="note-edit"
+                rows="15"
+                cols="35"
+                bind:value={note.body}
+                placeholder="Enter notes contents"
+            ></textarea>
+        </div>
+        <div id="note-footer">
+            <div class="button-group">
+                <button on:click={(e) => cancel(e)}> Cancel </button>
+                <button on:click={(e) => save(e)}> Save </button>
+            </div>
+        </div>
+    </div>
+{/if}
 
 <style>
     #noteHeader {
